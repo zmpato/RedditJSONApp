@@ -37,11 +37,11 @@ class FeedContoller: UIViewController {
         collectionView.delegate = self
         
         view.addSubview(collectionView)
-        collectionView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 60, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        collectionView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 50, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
         view.addSubview(topBar)
-        topBar.setDimensions(width: view.frame.width, height: 100)
-        topBar.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 780, paddingRight: 0)
+        topBar.setDimensions(width: view.frame.width, height: 50)
+        topBar.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0)
         
     }
 
