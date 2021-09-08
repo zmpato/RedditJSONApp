@@ -16,3 +16,21 @@ struct ContentArray {
     let scores: Int?
     let num_comments: Int?
 }
+
+extension FeedContoller {
+    func attachJSON() {
+        networkManager.jsonDataCall(completed: { [weak self] result in
+            switch result {
+            case .success:
+                self?.networkManager.contentArray.append(contentsOf: (self?.networkManager.contentArray)!)
+                DispatchQueue.main.async {
+                    self?.collectionView?.reloadData()
+                }
+            case .failure(_):
+                break
+            }
+        })
+        
+    }
+}
+

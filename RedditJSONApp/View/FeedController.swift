@@ -12,26 +12,20 @@ import UIKit
 class FeedContoller: UIViewController {
     
     let reuseIdentifier = "FeedCell"
-    var result: RedditData?
-    var contentArray = [ContentArray]()
     var collectionView: UICollectionView?
-    
- 
-    
+    var networkManager = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemRed
-        jsonDataCall {
-            self.collectionView?.reloadData()
-            print("THEARRAY: \(self.contentArray)")
-        }
+        attachJSON()
         configureUI()
     }
     
     
     
     func configureUI() {
+        
+        view.backgroundColor = .white
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -43,8 +37,18 @@ class FeedContoller: UIViewController {
         collectionView.delegate = self
         
         view.addSubview(collectionView)
-        collectionView.frame = view.bounds
+        collectionView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 60, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        
+        view.addSubview(topBar)
+        topBar.setDimensions(width: view.frame.width, height: 100)
+        topBar.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 780, paddingRight: 0)
         
     }
+
+    var topBar: UIView = {
+        let tb = UIView()
+        tb.backgroundColor = .systemGray6
+        return tb
+    }()
 }
 

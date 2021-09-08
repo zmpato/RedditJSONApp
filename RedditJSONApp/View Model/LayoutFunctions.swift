@@ -84,3 +84,9 @@ extension UIView {
     }
 }
 
+
+func customFont(fontFamily: String = "AvenirNext-DemiBold", size: CGFloat) -> UIFont {
+    let font = UIFont(name: fontFamily, size: size)
+    return font ?? UIFont.systemFont(ofSize: size)
+}
+

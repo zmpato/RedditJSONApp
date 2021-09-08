@@ -78,11 +78,8 @@ class FeedCell: UICollectionViewCell {
    }()
     
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
         
         
         contentView.addSubview(captionLabel)
@@ -122,3 +119,37 @@ class FeedCell: UICollectionViewCell {
     
  
 }
+
+extension FeedCell {
+    
+    
+    func configure(_ cell: UICollectionViewCell, forReturning content: ContentArray) {
+        contentView.backgroundColor = .white
+        captionLabel.text = content.titles
+        captionLabel.font = customFont(size: 17)
+        let height = content.thumbnail_heights
+        let width = content.thumbnail_widths
+        postImage.frame.size = CGSize(width: width ?? 0, height: height ?? 0)
+        
+        let commentCount = content.num_comments
+        commentCountLabel.text = "\(commentCount ?? 0)"
+        commentCountLabel.font = customFont(size: 15)
+        
+        scoreCountLabel.text = "\(content.scores ?? 0)"
+        scoreCountLabel.font = customFont(size: 15)
+        
+        if let url = URL(string: content.thumbnails ?? "") {
+            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else { return }
+                
+                DispatchQueue.main.async { /// execute on main thread
+                    self.postImage.image = UIImage(data: data)
+                }
+            }
+            task.resume()
+        }
+    }
+    
+}
+
+
